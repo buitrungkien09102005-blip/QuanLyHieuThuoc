@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TrackBar;
 
 namespace QuanLyHieuThuoc
 {
@@ -53,6 +54,42 @@ namespace QuanLyHieuThuoc
         private void FormMDI_Load(object sender, EventArgs e)
         {
              
+        }
+
+        private void danhMụcToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void danhMụcToolStripMenuItem_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            Form form = new Form();
+            switch (e.ClickedItem.Name)
+            {
+                case "MenuNhanVien":
+                    NhanVien nhanVien = new NhanVien();
+                    form = nhanVien;
+                    break;
+
+                case "MenuKhachHang":
+                    KhachHang khachHang = new KhachHang();
+                    form = khachHang;
+                    break;
+
+                /*case "MenuThuoc":
+                    Thuoc thuoc = new Thuoc();
+                    form = thuoc;
+                    break;*/
+            }  
+            form.MdiParent = this;
+            form.WindowState = FormWindowState.Maximized;
+            form.Show();
+            form.BringToFront();
+        }
+
+        private void thuốcToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

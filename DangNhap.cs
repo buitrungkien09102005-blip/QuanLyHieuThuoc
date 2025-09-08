@@ -132,12 +132,19 @@ namespace QuanLyHieuThuoc
             cmd.Parameters["@TaiKhoan"].Value = txt_taikhoan.Text;
             cmd.Parameters.Add("@MatKhau", SqlDbType.NVarChar);
             cmd.Parameters["@MatKhau"].Value = txt_matkhau.Text;
-            
+            MessageBox.Show("Đăng kí thành công!");
             cmd.ExecuteNonQuery();
-
-            //MessageBox.Show("Đăng kí thành công!"); 
             conn.Close();
             //HienThi();
+            /*try
+            {
+                cmd.ExecuteNonQuery();
+                MessageBox.Show("Đăng ký thành công!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi: " + ex.Message);
+            }*/
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
@@ -149,6 +156,22 @@ namespace QuanLyHieuThuoc
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             MessageBox.Show("Vui lòng liên hệ Admin để lấy lại mật khẩu!");
+            /*
+            SqlConnection conn = new SqlConnection(conStr);
+            conn.Open();
+            string sql = "UPDATE TaiKhoan SET mat_khau=@newpass " +
+                         "WHERE ten_dang_nhap=@user AND mat_khau=@oldpass";
+            SqlCommand cmd = new SqlCommand(sql, conn);
+            cmd.Parameters.AddWithValue("@user", txt_taikhoan.Text.Trim());
+            cmd.Parameters.AddWithValue("@oldpass", txt_matkhau.Text.Trim());
+            cmd.Parameters.AddWithValue("@newpass", txt_matkhau.Text.Trim());
+
+            int rows = cmd.ExecuteNonQuery();
+            if (rows > 0)
+                MessageBox.Show("Đổi mật khẩu thành công!");
+            else
+                MessageBox.Show("Sai mật khẩu cũ!");
+            */
         }
 
         private void button_thoat_Click(object sender, EventArgs e)
