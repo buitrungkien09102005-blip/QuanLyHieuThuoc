@@ -47,7 +47,7 @@ namespace QuanLyHieuThuoc
 
                     int result = (int)cmd.ExecuteScalar();
 
-                    if (username == "kien" || password == "123" /*result > 0*/)
+                    if (result > 0)
                     {
                         //MessageBox.Show("Đăng nhập thành công!");
                         FormMDI mainForm = new FormMDI(); // form chính sau khi đăng nhập
@@ -119,12 +119,31 @@ namespace QuanLyHieuThuoc
         {
             //DangKy formDK = new DangKy();
             //formDK.ShowDialog();
+            string username = txt_taikhoan.Text.Trim();
+            string password = txt_matkhau.Text;
+            SqlConnection conn = new SqlConnection(conStr);
+            conn.Open();
+            string query = @"INSERT INTO TaiKhoan
+                                (TaiKhoan, MatKhau)
+                            VALUES (@TaiKhoan,@MatKhau)";
+            SqlCommand cmd = new SqlCommand(query, conn);
+
+            cmd.Parameters.Add("@TaiKhoan", SqlDbType.NVarChar);
+            cmd.Parameters["@TaiKhoan"].Value = txt_taikhoan.Text;
+            cmd.Parameters.Add("@MatKhau", SqlDbType.NVarChar);
+            cmd.Parameters["@MatKhau"].Value = txt_matkhau.Text;
+            
+            cmd.ExecuteNonQuery();
+
+            //MessageBox.Show("Đăng kí thành công!"); 
+            conn.Close();
+            //HienThi();
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             // Ẩn hiện mật khẩu
-            txt_matkhau.UseSystemPasswordChar = !checkBoxMatKhau.Checked;
+            txt_matkhau.UseSystemPasswordChar = !checkBoxMatKhau.Checked; 
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
