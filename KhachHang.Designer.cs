@@ -38,7 +38,11 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.buttonThem = new System.Windows.Forms.Button();
+            this.buttonSua = new System.Windows.Forms.Button();
+            this.buttonXoa = new System.Windows.Forms.Button();
+            this.buttonThoat = new System.Windows.Forms.Button();
+            this.dataGridView = new System.Windows.Forms.DataGridView();
             this.MaKH = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TenKH = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NgaySinh = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -46,10 +50,6 @@
             this.SoDienThoai = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DiaChi = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.GhiChu = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.buttonThem = new System.Windows.Forms.Button();
-            this.buttonSua = new System.Windows.Forms.Button();
-            this.buttonXoa = new System.Windows.Forms.Button();
-            this.buttonThoat = new System.Windows.Forms.Button();
             this.textBoxMaKH = new System.Windows.Forms.TextBox();
             this.textBoxTenKH = new System.Windows.Forms.TextBox();
             this.dateTimePickerNgaySinh = new System.Windows.Forms.DateTimePicker();
@@ -59,7 +59,7 @@
             this.textBoxGhiChu = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -78,7 +78,7 @@
             this.tableLayoutPanel1.Controls.Add(this.label7, 1, 6);
             this.tableLayoutPanel1.Controls.Add(this.label8, 1, 7);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 2, 8);
-            this.tableLayoutPanel1.Controls.Add(this.dataGridView1, 0, 9);
+            this.tableLayoutPanel1.Controls.Add(this.dataGridView, 0, 9);
             this.tableLayoutPanel1.Controls.Add(this.textBoxMaKH, 2, 1);
             this.tableLayoutPanel1.Controls.Add(this.textBoxTenKH, 2, 2);
             this.tableLayoutPanel1.Controls.Add(this.dateTimePickerNgaySinh, 2, 3);
@@ -210,16 +210,60 @@
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 51F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(750, 51);
             this.tableLayoutPanel2.TabIndex = 8;
             // 
-            // dataGridView1
+            // buttonThem
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.buttonThem.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonThem.Location = new System.Drawing.Point(3, 3);
+            this.buttonThem.Name = "buttonThem";
+            this.buttonThem.Size = new System.Drawing.Size(181, 45);
+            this.buttonThem.TabIndex = 0;
+            this.buttonThem.Text = "Thêm";
+            this.buttonThem.UseVisualStyleBackColor = true;
+            this.buttonThem.Click += new System.EventHandler(this.buttonThem_Click);
+            // 
+            // buttonSua
+            // 
+            this.buttonSua.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonSua.Location = new System.Drawing.Point(190, 3);
+            this.buttonSua.Name = "buttonSua";
+            this.buttonSua.Size = new System.Drawing.Size(181, 45);
+            this.buttonSua.TabIndex = 1;
+            this.buttonSua.Text = "Sửa";
+            this.buttonSua.UseVisualStyleBackColor = true;
+            this.buttonSua.Click += new System.EventHandler(this.buttonSua_Click);
+            // 
+            // buttonXoa
+            // 
+            this.buttonXoa.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonXoa.Location = new System.Drawing.Point(377, 3);
+            this.buttonXoa.Name = "buttonXoa";
+            this.buttonXoa.Size = new System.Drawing.Size(181, 45);
+            this.buttonXoa.TabIndex = 2;
+            this.buttonXoa.Text = "Xoá";
+            this.buttonXoa.UseVisualStyleBackColor = true;
+            this.buttonXoa.Click += new System.EventHandler(this.buttonXoa_Click);
+            // 
+            // buttonThoat
+            // 
+            this.buttonThoat.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonThoat.Location = new System.Drawing.Point(564, 3);
+            this.buttonThoat.Name = "buttonThoat";
+            this.buttonThoat.Size = new System.Drawing.Size(183, 45);
+            this.buttonThoat.TabIndex = 3;
+            this.buttonThoat.Text = "Thoát";
+            this.buttonThoat.UseVisualStyleBackColor = true;
+            this.buttonThoat.Click += new System.EventHandler(this.buttonThoat_Click);
+            // 
+            // dataGridView
+            // 
+            this.dataGridView.AllowUserToAddRows = false;
+            this.dataGridView.AllowUserToDeleteRows = false;
+            this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.MaKH,
             this.TenKH,
             this.NgaySinh,
@@ -227,15 +271,16 @@
             this.SoDienThoai,
             this.DiaChi,
             this.GhiChu});
-            this.tableLayoutPanel1.SetColumnSpan(this.dataGridView1, 4);
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 406);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.RowHeadersWidth = 62;
-            this.dataGridView1.RowTemplate.Height = 28;
-            this.dataGridView1.Size = new System.Drawing.Size(1075, 233);
-            this.dataGridView1.TabIndex = 9;
+            this.tableLayoutPanel1.SetColumnSpan(this.dataGridView, 4);
+            this.dataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView.Location = new System.Drawing.Point(3, 406);
+            this.dataGridView.Name = "dataGridView";
+            this.dataGridView.ReadOnly = true;
+            this.dataGridView.RowHeadersWidth = 62;
+            this.dataGridView.RowTemplate.Height = 28;
+            this.dataGridView.Size = new System.Drawing.Size(1075, 233);
+            this.dataGridView.TabIndex = 9;
+            this.dataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellClick);
             // 
             // MaKH
             // 
@@ -299,46 +344,6 @@
             this.GhiChu.Name = "GhiChu";
             this.GhiChu.ReadOnly = true;
             this.GhiChu.Width = 130;
-            // 
-            // buttonThem
-            // 
-            this.buttonThem.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonThem.Location = new System.Drawing.Point(3, 3);
-            this.buttonThem.Name = "buttonThem";
-            this.buttonThem.Size = new System.Drawing.Size(181, 45);
-            this.buttonThem.TabIndex = 0;
-            this.buttonThem.Text = "Thêm";
-            this.buttonThem.UseVisualStyleBackColor = true;
-            // 
-            // buttonSua
-            // 
-            this.buttonSua.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonSua.Location = new System.Drawing.Point(190, 3);
-            this.buttonSua.Name = "buttonSua";
-            this.buttonSua.Size = new System.Drawing.Size(181, 45);
-            this.buttonSua.TabIndex = 1;
-            this.buttonSua.Text = "Sửa";
-            this.buttonSua.UseVisualStyleBackColor = true;
-            // 
-            // buttonXoa
-            // 
-            this.buttonXoa.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonXoa.Location = new System.Drawing.Point(377, 3);
-            this.buttonXoa.Name = "buttonXoa";
-            this.buttonXoa.Size = new System.Drawing.Size(181, 45);
-            this.buttonXoa.TabIndex = 2;
-            this.buttonXoa.Text = "Xoá";
-            this.buttonXoa.UseVisualStyleBackColor = true;
-            // 
-            // buttonThoat
-            // 
-            this.buttonThoat.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonThoat.Location = new System.Drawing.Point(564, 3);
-            this.buttonThoat.Name = "buttonThoat";
-            this.buttonThoat.Size = new System.Drawing.Size(183, 45);
-            this.buttonThoat.TabIndex = 3;
-            this.buttonThoat.Text = "Thoát";
-            this.buttonThoat.UseVisualStyleBackColor = true;
             // 
             // textBoxMaKH
             // 
@@ -405,10 +410,11 @@
             this.Name = "KhachHang";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "KhachHang";
+            this.Load += new System.EventHandler(this.KhachHang_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -425,7 +431,7 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dataGridView;
         private System.Windows.Forms.DataGridViewTextBoxColumn MaKH;
         private System.Windows.Forms.DataGridViewTextBoxColumn TenKH;
         private System.Windows.Forms.DataGridViewTextBoxColumn NgaySinh;

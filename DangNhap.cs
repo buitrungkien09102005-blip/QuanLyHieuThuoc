@@ -30,45 +30,50 @@ namespace QuanLyHieuThuoc
 
         private void button_dangnhap_Click(object sender, EventArgs e)
         {
-            string username = txt_taikhoan.Text.Trim();
+            string username = txt_taikhoan.Text;
             string password = txt_matkhau.Text;
 
-
-            SqlConnection conn = new SqlConnection(conStr);
+            Connect c = new Connect();
+            //SqlConnection conn = new SqlConnection(conStr);
             //using (SqlConnection conn = Connect.GetConnection())
             //{
-                try
+            try
+            {
+                c.connect();
+                //string query = "SELECT * FROM TaiKhoan WHERE TaiKhoan= '" + username + "' " + " AND MatKhau= ' " + password + " ' ";
+                string query = "SELECT COUNT(*) FROM TaiKhoan WHERE TaiKhoan=@username AND MatKhau=@password ";
+                SqlCommand cmd = new SqlCommand(query, c.conn);
+                cmd.Parameters.AddWithValue("@username", username);
+                cmd.Parameters.AddWithValue("@password", password);
+                //SqlDataReader reader = cmd.ExecuteReader();
+                int result = (int)cmd.ExecuteScalar();
+
+                if (/*reader.Read() == true*/ result > 0)
                 {
-                    conn.Open();
-                    string query = "SELECT COUNT(*) FROM TaiKhoan WHERE TaiKhoan=@username AND MatKhau=@password";
-                    SqlCommand cmd = new SqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@username", username);
-                    cmd.Parameters.AddWithValue("@password", password);
-
-                    int result = (int)cmd.ExecuteScalar();
-
-                    if (result > 0)
-                    {
-                        //MessageBox.Show("Đăng nhập thành công!");
-                        FormMDI mainForm = new FormMDI(); // form chính sau khi đăng nhập
-                        mainForm.Show();
-                        this.Hide();
-                    }
-                    else if (username == "" || password == "")
-                    {
-                        MessageBox.Show("Vui lòng nhập đầy đủ Tài khoản và Mật khẩu!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        //return;
-                    }
-
-                    else
-                    {
-                            MessageBox.Show("Sai tài khoản hoặc mật khẩu!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
+                    //MessageBox.Show("Đăng nhập thành công!");
+                    this.Hide();
+                    FormMDI mainForm = new FormMDI(); // form chính sau khi đăng nhập
+                    mainForm.ShowDialog();
+                    mainForm = null;
+                    txt_matkhau.Text = "";
+                    this.Show();
                 }
-                catch (Exception ex)
+                else if (username == "" || password == "")
                 {
-                    MessageBox.Show("Lỗi: " + ex.Message);
+                    MessageBox.Show("Vui lòng nhập đầy đủ Tài khoản và Mật khẩu!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    //return;
                 }
+
+                else
+                {
+                    MessageBox.Show("Sai tài khoản hoặc mật khẩu!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txt_matkhau.Text = "";
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi: " + ex.Message);
+            }
             //}
             /*
             using (SqlConnection KetNoi = new SqlConnection(conn))

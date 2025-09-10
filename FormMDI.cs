@@ -16,6 +16,7 @@ namespace QuanLyHieuThuoc
         public FormMDI()
         {
             InitializeComponent();
+            menuStrip1.BringToFront();
         }
 
         private void đăngNhậpToolStripMenuItem_Click(object sender, EventArgs e)
@@ -53,7 +54,7 @@ namespace QuanLyHieuThuoc
 
         private void FormMDI_Load(object sender, EventArgs e)
         {
-             
+            
         }
 
         private void danhMụcToolStripMenuItem_Click(object sender, EventArgs e)
@@ -76,10 +77,10 @@ namespace QuanLyHieuThuoc
                     form = khachHang;
                     break;
 
-                /*case "MenuThuoc":
+                case "MenuThuoc":
                     Thuoc thuoc = new Thuoc();
                     form = thuoc;
-                    break;*/
+                    break;
             }  
             form.MdiParent = this;
             form.WindowState = FormWindowState.Maximized;
@@ -88,6 +89,11 @@ namespace QuanLyHieuThuoc
         }
 
         private void thuốcToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
         {
 
         }

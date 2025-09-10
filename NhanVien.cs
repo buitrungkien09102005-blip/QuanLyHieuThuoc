@@ -19,28 +19,22 @@ namespace QuanLyHieuThuoc
         }
 
         // Kết nối đến csdl
-        string conStr = @" Data Source=Eagle\SQLEXPRESS01;
-                           Initial Catalog=LTMT2-K15-Nhom11;
-                           Integrated Security=True";
-        //string query = @"";
-        //SqlConnection KetNoi;
-        //SqlCommand ThucHien;
-        //SqlDataReader Doc;
+        Connect c = new Connect();
 
         private void NhanVien_Load(object sender, EventArgs e)
         {
-            SqlConnection conn = new SqlConnection(conStr);
             HienThi();
         }
 
         void HienThi()
         {
             dataGridView.Rows.Clear();
-            SqlConnection conn = new SqlConnection(conStr);
-            string query = @"SELECT MaNV, TenNV, NgaySinh, GioiTinh, SoDienThoai, DiaChi, GhiChu
+            //SqlConnection conn = new SqlConnection(conStr);
+            string query = @"SELECT MaNV, TenNV, NgaySinh, GioiTinh, SoDienThoai, DiaChi, GhiChu,
+                                FORMAT(NgaySinh, 'dd/MM/yyyy') AS NgaySinh
                              FROM   NhanVien";
-            SqlCommand cmd = new SqlCommand(query, conn);
-            conn.Open();
+            c.connect();
+            SqlCommand cmd = new SqlCommand(query, c.conn);
             SqlDataReader read = cmd.ExecuteReader();
             int i = 0;
             while (read.Read())
@@ -48,24 +42,52 @@ namespace QuanLyHieuThuoc
                 dataGridView.Rows.Add();
                 dataGridView.Rows[i].Cells[0].Value = read[0];
                 dataGridView.Rows[i].Cells[1].Value = read[1];
-                dataGridView.Rows[i].Cells[2].Value = read[2];
+                dataGridView.Rows[i].Cells[2].Value = read[2].ToString().Substring(0, 10);
                 dataGridView.Rows[i].Cells[3].Value = read[3];
                 dataGridView.Rows[i].Cells[4].Value = read[4];
                 dataGridView.Rows[i].Cells[5].Value = read[5];
                 dataGridView.Rows[i].Cells[6].Value = read[6];
                 i++;
             }
-            conn.Close();
+            c.disconnect();
+        }
+
+        private void ClearFields()
+        {
+            textBoxMaNV.Clear();
+            textBoxTenNV.Clear();
+            textBoxDienThoai.Clear();
+            textBoxDiaChi.Clear();
+            textBoxGhiChu.Clear();
+            textBoxGioiTinh.Clear();
+            dateTimePickerNgaySinh.Value = DateTime.Now;
+
+            //radioNam.Checked = false;
+            //radioNu.Checked = false;
         }
 
         private void buttonThem_Click(object sender, EventArgs e)
         {
-            SqlConnection conn = new SqlConnection(conStr);
-            conn.Open();
+            //SqlConnection conn = new SqlConnection(conStr);
+            c.connect();
+
+            string checkQuery = "SELECT COUNT(*) FROM NhanVien WHERE MaNV = @MaNV";
+            SqlCommand checkCmd = new SqlCommand(checkQuery, c.conn);
+            checkCmd.Parameters.AddWithValue("@MaNV", textBoxMaNV.Text.Trim());
+
+            int count = (int)checkCmd.ExecuteScalar();
+
+            if (count > 0)
+            {
+                MessageBox.Show("Mã nhân viên đã tồn tại, vui lòng nhập mã khác!", "Thông báo",
+                                                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return; // Dừng, không thêm nữa
+            }
+
             string query = @"INSERT INTO NhanVien
                                 (MaNV, TenNV, NgaySinh, GioiTinh, SoDienThoai, DiaChi, GhiChu)
                             VALUES (@MaNV,@TenNV,@NgaySinh,@GioiTinh,@SoDienThoai,@DiaChi,@GhiChu)";
-            SqlCommand cmd = new SqlCommand(query, conn);
+            SqlCommand cmd = new SqlCommand(query, c.conn);
 
             cmd.Parameters.Add("@MaNV", SqlDbType.NVarChar);
             cmd.Parameters["@MaNV"].Value = textBoxMaNV.Text;
@@ -81,9 +103,10 @@ namespace QuanLyHieuThuoc
             cmd.Parameters["@DiaChi"].Value = textBoxDiaChi.Text;
             cmd.Parameters.Add("@GhiChu", SqlDbType.NVarChar);
             cmd.Parameters["@GhiChu"].Value = textBoxGhiChu.Text;
-            
+            ClearFields();
+
             cmd.ExecuteNonQuery();
-            conn.Close();
+            c.disconnect();
             HienThi();
         }
 
@@ -100,14 +123,14 @@ namespace QuanLyHieuThuoc
 
         private void buttonSua_Click(object sender, EventArgs e)
         {
-            SqlConnection conn = new SqlConnection(conStr);
-            conn.Open();
+            //SqlConnection conn = new SqlConnection(conStr);
+            c.connect();
             string query = @"UPDATE NhanVien
                              SET    MaNV = @MaNV, TenNV = @TenNV, NgaySinh = @NgaySinh, 
                                     GioiTinh = @GioiTinh, SoDienThoai = @SoDienThoai, 
                                     DiaChi = @DiaChi, GhiChu = @GhiChu
                              WHERE (MaNV = @Original_MaNV)";
-            SqlCommand cmd = new SqlCommand(query, conn);
+            SqlCommand cmd = new SqlCommand(query, c.conn);
 
             cmd.Parameters.Add("@MaNV", SqlDbType.NVarChar);
             cmd.Parameters["@MaNV"].Value = textBoxMaNV.Text;
@@ -127,24 +150,29 @@ namespace QuanLyHieuThuoc
             cmd.Parameters["@Original_MaNV"].Value = dataGridView.CurrentRow.Cells[0].Value;
 
             cmd.ExecuteNonQuery();
-            conn.Close();
+            c.disconnect();
             HienThi();
         }
 
         private void buttonXoa_Click(object sender, EventArgs e)
         {
-            SqlConnection conn = new SqlConnection(conStr);
-            conn.Open();
-            string query = @"DELETE FROM NhanVien
+            DialogResult D = MessageBox.Show("Bạn có chắc muốn xoá nhân viên "+textBoxTenNV.Text, "Chú ý", 
+                                                MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (D == DialogResult.Yes)
+            {
+                //SqlConnection conn = new SqlConnection(conStr);
+                c.connect();
+                string query = @"DELETE FROM NhanVien
                             WHERE (MaNV = @Original_MaNV)";
-            SqlCommand cmd = new SqlCommand(query, conn);
+                SqlCommand cmd = new SqlCommand(query, c.conn);
 
-            cmd.Parameters.Add("@Original_MaNV", SqlDbType.NVarChar);
-            cmd.Parameters["@Original_MaNV"].Value = dataGridView.CurrentRow.Cells[0].Value;
+                cmd.Parameters.Add("@Original_MaNV", SqlDbType.NVarChar);
+                cmd.Parameters["@Original_MaNV"].Value = dataGridView.CurrentRow.Cells[0].Value;
 
-            cmd.ExecuteNonQuery();
-            conn.Close();
-            HienThi();
+                cmd.ExecuteNonQuery();
+                c.disconnect();
+                HienThi();
+            }
         }
 
         private void buttonThoat_Click(object sender, EventArgs e)
