@@ -90,12 +90,43 @@ namespace QuanLyHieuThuoc
 
         private void thuốcToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            Thuoc thuoc = new Thuoc();
+            thuoc.MdiParent = this;
+            thuoc.Show();
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void thốngKêTheoNhânViênToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ThongKeNhanVien thongKe = new ThongKeNhanVien();
+            thongKe.MdiParent = this;
+            thongKe.Show();
+        }
+
+        private void thốngKêTheoNhânViênToolStripMenuItem_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+        private void ThốngKêToolStripMenuItem_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            Form form = new Form();
+            switch (e.ClickedItem.Name)
+            {
+                case "MenuThongKeNhanVien":
+                    ThongKeNhanVien thongKe = new ThongKeNhanVien();
+                    form = thongKe;
+                    break;
+
+            }
+            form.MdiParent = this;
+            form.WindowState = FormWindowState.Maximized;
+            form.Show();
+            form.BringToFront();
         }
     }
 }

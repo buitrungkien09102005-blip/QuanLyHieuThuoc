@@ -177,7 +177,14 @@ namespace QuanLyHieuThuoc
 
         private void buttonThoat_Click(object sender, EventArgs e)
         {
-            this.Close();
+            DialogResult D = MessageBox.Show("Bạn có chắc muốn thoát ", "Chú ý",
+                                                MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (D == DialogResult.Yes)
+            {
+                c.connect();
+                this.Close();
+                c.disconnect();
+            }
         }
     }
 }
