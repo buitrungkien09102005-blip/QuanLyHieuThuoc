@@ -147,6 +147,7 @@
             this.chiTiếtHoáĐơnBánHàngToolStripMenuItem.Name = "chiTiếtHoáĐơnBánHàngToolStripMenuItem";
             this.chiTiếtHoáĐơnBánHàngToolStripMenuItem.Size = new System.Drawing.Size(379, 34);
             this.chiTiếtHoáĐơnBánHàngToolStripMenuItem.Text = "Chi tiết hoá đơn bán hàng";
+            this.chiTiếtHoáĐơnBánHàngToolStripMenuItem.Click += new System.EventHandler(this.chiTiếtHoáĐơnBánHàngToolStripMenuItem_Click);
             // 
             // ThốngKêToolStripMenuItem
             // 

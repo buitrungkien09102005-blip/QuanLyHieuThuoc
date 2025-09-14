@@ -128,5 +128,12 @@ namespace QuanLyHieuThuoc
             form.Show();
             form.BringToFront();
         }
+
+        private void chiTiếtHoáĐơnBánHàngToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ChiTietHoaDon chitietHoaDon = new ChiTietHoaDon();
+            chitietHoaDon.MdiParent = this;
+            chitietHoaDon.Show();
+        }
     }
 }
