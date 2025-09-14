@@ -45,6 +45,11 @@
             this.textBoxTenThuoc = new System.Windows.Forms.TextBox();
             this.textBoxGiamGia = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.buttonThem = new System.Windows.Forms.Button();
+            this.buttonSua = new System.Windows.Forms.Button();
+            this.buttonXoa = new System.Windows.Forms.Button();
+            this.buttonXuatExel = new System.Windows.Forms.Button();
+            this.buttonThoat = new System.Windows.Forms.Button();
             this.dataGridView = new System.Windows.Forms.DataGridView();
             this.MaHoaDon = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MaThuoc = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -53,11 +58,6 @@
             this.ThanhTien = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TenThuoc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.GiamGia = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.buttonThem = new System.Windows.Forms.Button();
-            this.buttonSua = new System.Windows.Forms.Button();
-            this.buttonXoa = new System.Windows.Forms.Button();
-            this.buttonXuatExel = new System.Windows.Forms.Button();
-            this.buttonThoat = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
@@ -199,11 +199,13 @@
             // comboBoxMaThuoc
             // 
             this.comboBoxMaThuoc.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.comboBoxMaThuoc.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxMaThuoc.FormattingEnabled = true;
             this.comboBoxMaThuoc.Location = new System.Drawing.Point(296, 93);
             this.comboBoxMaThuoc.Name = "comboBoxMaThuoc";
             this.comboBoxMaThuoc.Size = new System.Drawing.Size(818, 37);
             this.comboBoxMaThuoc.TabIndex = 8;
+            this.comboBoxMaThuoc.SelectedIndexChanged += new System.EventHandler(this.comboBoxMaThuoc_SelectedIndexChanged);
             // 
             // textBoxMaHoaDon
             // 
@@ -271,14 +273,70 @@
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 48F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(818, 48);
             this.tableLayoutPanel2.TabIndex = 15;
+            // 
+            // buttonThem
+            // 
+            this.buttonThem.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonThem.Location = new System.Drawing.Point(3, 3);
+            this.buttonThem.Name = "buttonThem";
+            this.buttonThem.Size = new System.Drawing.Size(157, 42);
+            this.buttonThem.TabIndex = 0;
+            this.buttonThem.Text = "Thêm";
+            this.buttonThem.UseVisualStyleBackColor = true;
+            this.buttonThem.Click += new System.EventHandler(this.buttonThem_Click);
+            // 
+            // buttonSua
+            // 
+            this.buttonSua.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonSua.Location = new System.Drawing.Point(166, 3);
+            this.buttonSua.Name = "buttonSua";
+            this.buttonSua.Size = new System.Drawing.Size(157, 42);
+            this.buttonSua.TabIndex = 1;
+            this.buttonSua.Text = "Sửa";
+            this.buttonSua.UseVisualStyleBackColor = true;
+            this.buttonSua.Click += new System.EventHandler(this.buttonSua_Click_1);
+            // 
+            // buttonXoa
+            // 
+            this.buttonXoa.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonXoa.Location = new System.Drawing.Point(329, 3);
+            this.buttonXoa.Name = "buttonXoa";
+            this.buttonXoa.Size = new System.Drawing.Size(157, 42);
+            this.buttonXoa.TabIndex = 2;
+            this.buttonXoa.Text = "Xóa";
+            this.buttonXoa.UseVisualStyleBackColor = true;
+            this.buttonXoa.Click += new System.EventHandler(this.buttonXoa_Click_1);
+            // 
+            // buttonXuatExel
+            // 
+            this.buttonXuatExel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonXuatExel.Location = new System.Drawing.Point(492, 3);
+            this.buttonXuatExel.Name = "buttonXuatExel";
+            this.buttonXuatExel.Size = new System.Drawing.Size(157, 42);
+            this.buttonXuatExel.TabIndex = 3;
+            this.buttonXuatExel.Text = "Xuất Exel";
+            this.buttonXuatExel.UseVisualStyleBackColor = true;
+            this.buttonXuatExel.Click += new System.EventHandler(this.buttonXuatExel_Click_1);
+            // 
+            // buttonThoat
+            // 
+            this.buttonThoat.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonThoat.Location = new System.Drawing.Point(655, 3);
+            this.buttonThoat.Name = "buttonThoat";
+            this.buttonThoat.Size = new System.Drawing.Size(160, 42);
+            this.buttonThoat.TabIndex = 4;
+            this.buttonThoat.Text = "Thoát";
+            this.buttonThoat.UseVisualStyleBackColor = true;
+            this.buttonThoat.Click += new System.EventHandler(this.buttonThoat_Click_1);
             // 
             // dataGridView
             // 
             this.dataGridView.AllowUserToAddRows = false;
             this.dataGridView.AllowUserToDeleteRows = false;
+            this.dataGridView.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.MaHoaDon,
@@ -297,6 +355,7 @@
             this.dataGridView.RowTemplate.Height = 28;
             this.dataGridView.Size = new System.Drawing.Size(1172, 314);
             this.dataGridView.TabIndex = 16;
+            this.dataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellClick_1);
             // 
             // MaHoaDon
             // 
@@ -361,65 +420,16 @@
             this.GiamGia.ReadOnly = true;
             this.GiamGia.Width = 141;
             // 
-            // buttonThem
-            // 
-            this.buttonThem.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonThem.Location = new System.Drawing.Point(3, 3);
-            this.buttonThem.Name = "buttonThem";
-            this.buttonThem.Size = new System.Drawing.Size(157, 42);
-            this.buttonThem.TabIndex = 0;
-            this.buttonThem.Text = "Thêm";
-            this.buttonThem.UseVisualStyleBackColor = true;
-            this.buttonThem.Click += new System.EventHandler(this.buttonThem_Click);
-            // 
-            // buttonSua
-            // 
-            this.buttonSua.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonSua.Location = new System.Drawing.Point(166, 3);
-            this.buttonSua.Name = "buttonSua";
-            this.buttonSua.Size = new System.Drawing.Size(157, 42);
-            this.buttonSua.TabIndex = 1;
-            this.buttonSua.Text = "Sửa";
-            this.buttonSua.UseVisualStyleBackColor = true;
-            // 
-            // buttonXoa
-            // 
-            this.buttonXoa.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonXoa.Location = new System.Drawing.Point(329, 3);
-            this.buttonXoa.Name = "buttonXoa";
-            this.buttonXoa.Size = new System.Drawing.Size(157, 42);
-            this.buttonXoa.TabIndex = 2;
-            this.buttonXoa.Text = "Xóa";
-            this.buttonXoa.UseVisualStyleBackColor = true;
-            // 
-            // buttonXuatExel
-            // 
-            this.buttonXuatExel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonXuatExel.Location = new System.Drawing.Point(492, 3);
-            this.buttonXuatExel.Name = "buttonXuatExel";
-            this.buttonXuatExel.Size = new System.Drawing.Size(157, 42);
-            this.buttonXuatExel.TabIndex = 3;
-            this.buttonXuatExel.Text = "Xuất Exel";
-            this.buttonXuatExel.UseVisualStyleBackColor = true;
-            // 
-            // buttonThoat
-            // 
-            this.buttonThoat.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonThoat.Location = new System.Drawing.Point(655, 3);
-            this.buttonThoat.Name = "buttonThoat";
-            this.buttonThoat.Size = new System.Drawing.Size(160, 42);
-            this.buttonThoat.TabIndex = 4;
-            this.buttonThoat.Text = "Thoát";
-            this.buttonThoat.UseVisualStyleBackColor = true;
-            // 
             // ChiTietHoaDon
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.ClientSize = new System.Drawing.Size(1178, 734);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "ChiTietHoaDon";
             this.Text = "ChiTietHoaDon";
+            this.Load += new System.EventHandler(this.ChiTietHoaDon_Load_1);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);

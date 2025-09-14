@@ -29,7 +29,7 @@ namespace QuanLyHieuThuoc
         void HienThi()
         {
             dataGridView.Rows.Clear();
-            //SqlConnection conn = new SqlConnection(conStr);
+
             string query = @"SELECT MaNV, TenNV, NgaySinh, GioiTinh, SoDienThoai, DiaChi, GhiChu,
                                 FORMAT(NgaySinh, 'dd/MM/yyyy') AS NgaySinh
                              FROM   NhanVien";
@@ -61,14 +61,10 @@ namespace QuanLyHieuThuoc
             textBoxGhiChu.Clear();
             textBoxGioiTinh.Clear();
             dateTimePickerNgaySinh.Value = DateTime.Now;
-
-            //radioNam.Checked = false;
-            //radioNu.Checked = false;
         }
 
         private void buttonThem_Click(object sender, EventArgs e)
         {
-            //SqlConnection conn = new SqlConnection(conStr);
             c.connect();
 
             string checkQuery = "SELECT COUNT(*) FROM NhanVien WHERE MaNV = @MaNV";
@@ -123,7 +119,6 @@ namespace QuanLyHieuThuoc
 
         private void buttonSua_Click(object sender, EventArgs e)
         {
-            //SqlConnection conn = new SqlConnection(conStr);
             c.connect();
             string query = @"UPDATE NhanVien
                              SET    MaNV = @MaNV, TenNV = @TenNV, NgaySinh = @NgaySinh, 
@@ -160,7 +155,6 @@ namespace QuanLyHieuThuoc
                                                 MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (D == DialogResult.Yes)
             {
-                //SqlConnection conn = new SqlConnection(conStr);
                 c.connect();
                 string query = @"DELETE FROM NhanVien
                             WHERE (MaNV = @Original_MaNV)";

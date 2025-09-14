@@ -16,7 +16,6 @@ namespace QuanLyHieuThuoc
         public FormMDI()
         {
             InitializeComponent();
-            menuStrip1.BringToFront();
         }
 
         private void đăngNhậpToolStripMenuItem_Click(object sender, EventArgs e)
@@ -102,9 +101,7 @@ namespace QuanLyHieuThuoc
 
         private void thốngKêTheoNhânViênToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ThongKeNhanVien thongKe = new ThongKeNhanVien();
-            thongKe.MdiParent = this;
-            thongKe.Show();
+
         }
 
         private void thốngKêTheoNhânViênToolStripMenuItem_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
@@ -117,9 +114,9 @@ namespace QuanLyHieuThuoc
             Form form = new Form();
             switch (e.ClickedItem.Name)
             {
-                case "MenuThongKeNhanVien":
-                    ThongKeNhanVien thongKe = new ThongKeNhanVien();
-                    form = thongKe;
+                case "MenuThongKeDonHang":
+                    ThongKeDonHang thongKeDonHang = new ThongKeDonHang();
+                    form = thongKeDonHang;
                     break;
 
             }
@@ -134,6 +131,47 @@ namespace QuanLyHieuThuoc
             ChiTietHoaDon chitietHoaDon = new ChiTietHoaDon();
             chitietHoaDon.MdiParent = this;
             chitietHoaDon.Show();
+        }
+
+        private void hoáĐơnBánToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            HoaDonBan HoaDon = new HoaDonBan();
+            HoaDon.MdiParent = this;
+            HoaDon.Show();
+        }
+
+        private void hoáĐơnToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void hoáĐơnToolStripMenuItem_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            Form form = new Form();
+            switch (e.ClickedItem.Name)
+            {
+                case "MenuHoaDonBan":
+                    HoaDonBan HoaDon = new HoaDonBan();
+                    form = HoaDon;
+                    break;
+
+                case "MenuChiTietHoaDon":
+                    ChiTietHoaDon chitietHoaDon = new ChiTietHoaDon();
+                    form = chitietHoaDon;
+                    break;
+
+            }
+            form.MdiParent = this;
+            form.WindowState = FormWindowState.Maximized;
+            form.Show();
+            form.BringToFront();
+        }
+
+        private void thốngKêTheoĐơnHàngToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ThongKeDonHang thongKeDonHang = new ThongKeDonHang();
+            thongKeDonHang.MdiParent = this;
+            thongKeDonHang.Show();
         }
     }
 }

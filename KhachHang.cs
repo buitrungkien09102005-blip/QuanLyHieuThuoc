@@ -23,7 +23,6 @@ namespace QuanLyHieuThuoc
         void HienThi()
         {
             dataGridView.Rows.Clear();
-            //SqlConnection conn = new SqlConnection(conStr);
             string query = @"SELECT MaKH, TenKH, NgaySinh, GioiTinh, SoDienThoai, DiaChi, GhiChu
                             FROM   KhachHang";
             c.connect();
@@ -45,7 +44,6 @@ namespace QuanLyHieuThuoc
             c.disconnect();
         }
 
-        // Hàm xóa trắng toàn bộ các TextBox, DateTimePicker, RadioButton
         private void ClearFields()
         {
             textBoxMaKH.Clear();
@@ -55,9 +53,6 @@ namespace QuanLyHieuThuoc
             textBoxGhiChu.Clear();
             textBoxGioiTinh.Clear();
             dateTimePickerNgaySinh.Value = DateTime.Now;
-
-            //radioNam.Checked = false;
-            //radioNu.Checked = false;
         }
 
         private void buttonThem_Click(object sender, EventArgs e)
@@ -157,7 +152,6 @@ namespace QuanLyHieuThuoc
                                                 MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (D == DialogResult.Yes)
             {
-                //SqlConnection conn = new SqlConnection(conStr);
                 c.connect();
                 string query = @"DELETE FROM KhachHang
                                 WHERE (MaKH = @Original_MaKH)";

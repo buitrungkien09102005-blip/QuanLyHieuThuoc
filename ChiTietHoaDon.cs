@@ -20,100 +20,10 @@ namespace QuanLyHieuThuoc
             InitializeComponent();
         }
         Connect c = new Connect();
-      
-
-
-        private void ChiTietHoaDon_Load(object sender, EventArgs e)
-        {
-            
-            comboBoxMaThuoc.Items.Clear();
-
-            c.connect();
-
-            string queryThuoc = "SELECT MaThuoc, TenThuoc FROM Thuoc";
-            SqlCommand cmd = new SqlCommand(queryThuoc, c.conn);
-
-            SqlDataReader rd = cmd.ExecuteReader();
-            while (rd.Read())
-            {
-                comboBoxMaThuoc.Items.Add(rd["MaThuoc"].ToString());
-            }
-
-            c.disconnect();
-            HienThi();
-        }
-
-
-
-        private void çomboBoxMaThuoc_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            textBoxTenThuoc.Clear();
-
-            c.connect();
-
-
-            string maThuoc = comboBoxMaThuoc.Text;
-            string query = "SELECT TenThuoc, GiaBan FROM Thuoc WHERE MaThuoc=@MaThuoc";
-            SqlCommand cmd = new SqlCommand(query, c.conn);
-            cmd.Parameters.AddWithValue("@MaThuoc", maThuoc);
-
-
-            SqlDataReader rd = cmd.ExecuteReader();
-            if (rd.Read())
-            {
-                textBoxTenThuoc.Text = rd["TenThuoc"].ToString();
-
-                textBoxDonGia.Text = Convert.ToDecimal(rd["GiaBan"]).ToString("0.00");
-            }
-            c.disconnect();
-           }
-
-            void HienThi()
-            {
-                dataGridView.Rows.Clear();
-                
-                string query = @"SELECT MaHoaDon, MaThuoc, SoLuong, DonGia, ThanhTien, TenThuoc, GiamGia
-                               FROM ChiTietHoaDon";
-                c.connect();
-                SqlCommand cmd = new SqlCommand(query, c.conn);
-                SqlDataReader read = cmd.ExecuteReader();
-                int i = 0;
-                while (read.Read())
-                {
-
-                    dataGridView.Rows.Add();
-                    dataGridView.Rows[i].Cells[0].Value = read[0];
-                    dataGridView.Rows[i].Cells[1].Value = read[1];
-                    dataGridView.Rows[i].Cells[2].Value = read[2];
-                    dataGridView.Rows[i].Cells[3].Value = read[3];
-                    dataGridView.Rows[1].Cells[4].Value = read[4];
-                    dataGridView.Rows[i].Cells[5].Value = read[5];
-                    dataGridView.Rows[i].Cells[6].Value = read[6];
-                    i++;
-                }
-
-
-                c.disconnect();
-            }
-        
-
-        private void ClearFields()
-        {
-            textBoxMaHoaDon.Clear();
-            comboBoxMaThuoc.Items.Clear();
-            textBoxSoLuong.Clear();
-            textBoxDonGia.Clear();
-            textBoxThanhTien.Clear();
-            textBoxGiamGia.Clear();
-            textBoxTenThuoc.Clear();
-        }
-
 
         private void buttonThem_Click(object sender, EventArgs e)
         {
             c.connect();
-            
-
             string query = @"INSERT INTO ChiTietHoaDon
                     (MaHoaDon, MaThuoc, SoLuong, DonGia, ThanhTien, TenThuoc, GiamGia)
                         VALUES (@MaHoaDon, @MaThuoc, @SoLuong, @DonGia, (@ThanhTien, @TenThuoc, @GiamGia)";
@@ -132,15 +42,88 @@ namespace QuanLyHieuThuoc
             cmd.Parameters.AddWithValue("@TenThuoc", textBoxTenThuoc.Text);
             cmd.Parameters.AddWithValue("@GiamGia", giamGia);
 
-
             ClearFields();
-
             cmd.ExecuteNonQuery();
             c.disconnect();
             HienThi();
         }
-      
-        private void dataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ChiTietHoaDon_Load_1(object sender, EventArgs e)
+        {
+            comboBoxMaThuoc.Items.Clear();
+            c.connect();
+            string queryThuoc = "SELECT MaThuoc, TenThuoc FROM Thuoc";
+            SqlCommand cmd = new SqlCommand(queryThuoc, c.conn);
+            SqlDataReader rd = cmd.ExecuteReader();
+            while (rd.Read())
+            {
+                comboBoxMaThuoc.Items.Add(rd["MaThuoc"].ToString());
+            }
+            c.disconnect();
+            HienThi();
+        }
+
+        private void comboBoxMaThuoc_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            textBoxTenThuoc.Clear();
+            c.connect();
+            string maThuoc = comboBoxMaThuoc.Text;
+            string query = "SELECT TenThuoc, GiaBan FROM Thuoc WHERE MaThuoc=@MaThuoc";
+            SqlCommand cmd = new SqlCommand(query, c.conn);
+            cmd.Parameters.AddWithValue("@MaThuoc", maThuoc);
+            SqlDataReader rd = cmd.ExecuteReader();
+            if (rd.Read())
+            {
+                textBoxTenThuoc.Text = rd["TenThuoc"].ToString();
+
+                textBoxDonGia.Text = Convert.ToDecimal(rd["GiaBan"]).ToString("0.00");
+            }
+            c.disconnect();
+        }
+
+        void HienThi()
+        {
+            dataGridView.Rows.Clear();
+
+            string query = @"SELECT MaHoaDon, MaThuoc, SoLuong, DonGia, ThanhTien, TenThuoc, GiamGia
+                               FROM ChiTietHoaDon";
+            c.connect();
+            SqlCommand cmd = new SqlCommand(query, c.conn);
+            SqlDataReader read = cmd.ExecuteReader();
+            int i = 0;
+            while (read.Read())
+            {
+
+                dataGridView.Rows.Add();
+                dataGridView.Rows[i].Cells[0].Value = read[0];
+                dataGridView.Rows[i].Cells[1].Value = read[1];
+                dataGridView.Rows[i].Cells[2].Value = read[2];
+                dataGridView.Rows[i].Cells[3].Value = read[3];
+                dataGridView.Rows[i].Cells[4].Value = read[4];
+                dataGridView.Rows[i].Cells[5].Value = read[5];
+                dataGridView.Rows[i].Cells[6].Value = read[6];
+                i++;
+            }
+            c.disconnect();
+        }
+
+        private void ClearFields()
+        {
+            textBoxMaHoaDon.Clear();
+            comboBoxMaThuoc.Items.Clear();
+            textBoxSoLuong.Clear();
+            textBoxDonGia.Clear();
+            textBoxThanhTien.Clear();
+            textBoxGiamGia.Clear();
+            textBoxTenThuoc.Clear();
+        }
+
+        private void dataGridView_CellClick_1(object sender, DataGridViewCellEventArgs e)
         {
             textBoxMaHoaDon.Text = dataGridView.CurrentRow.Cells[0].Value.ToString();
             comboBoxMaThuoc.Text = dataGridView.CurrentRow.Cells[1].Value.ToString();
@@ -151,17 +134,14 @@ namespace QuanLyHieuThuoc
             textBoxGiamGia.Text = dataGridView.CurrentRow.Cells[6].Value.ToString();
         }
 
-
-        private void buttonSua_Click(object sender, EventArgs e)
+        private void buttonSua_Click_1(object sender, EventArgs e)
         {
             c.connect();
-            
+
             string query = @"UPDATE ChiTietHoaDon
-                SET
-                         MaHoaDon = @MaHoaDon, MaThuoc = @MaThuoc,
-                        SoLuong = @SoLuong, DonGia = @DonGia, ThanhTien = @ThanhTien,
-                        GiamGia = @GiamGia, TenThuoc = @TenThuoc
-                     WHERE (MaHoaDon = @Original_MaHoaDon) AND (MaThuoc = @Original_MaThuoc)";
+                             SET    MaHoaDon = @MaHoaDon, MaThuoc = @MaThuoc, SoLuong = @SoLuong, 
+                                    DonGia = @DonGia, ThanhTien = @ThanhTien, GiamGia = @GiamGia, TenThuoc = @TenThuoc
+                            WHERE (MaHoaDon = @Original_MaHoaDon) AND (MaThuoc = @Original_MaThuoc)";
 
             SqlCommand cmd = new SqlCommand(query, c.conn);
 
@@ -186,15 +166,14 @@ namespace QuanLyHieuThuoc
             HienThi();
         }
 
-        private void buttonXoa_Click(object sender, EventArgs e)
+        private void buttonXoa_Click_1(object sender, EventArgs e)
         {
-            
             DialogResult D = MessageBox.Show("Bạn có chắc muốn xa mã hoá đơn " + textBoxMaHoaDon.Text, "Chú ý",
                                                 MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
             if (D == DialogResult.Yes)
             {
-                
+
                 c.connect();
 
                 string query = @"DELETE FROM ChiTietHoaDon
@@ -204,20 +183,19 @@ namespace QuanLyHieuThuoc
 
                 cmd.Parameters.Add("@Original_MaHoaDon", SqlDbType.NVarChar);
                 cmd.Parameters["@Original_MaHoaDon"].Value = dataGridView.CurrentRow.Cells[0].Value;
-                
+
                 cmd.ExecuteNonQuery();
                 c.disconnect();
                 HienThi();
             }
         }
 
-        private void buttonThoat_Click(object sender, EventArgs e)
+        private void buttonThoat_Click_1(object sender, EventArgs e)
         {
             this.Close();
         }
 
-
-        private void buttonXuatExel_Click(object sender, EventArgs e)
+        private void buttonXuatExel_Click_1(object sender, EventArgs e)
         {
             try
             {
@@ -227,45 +205,56 @@ namespace QuanLyHieuThuoc
                 Excel._Worksheet worksheet = (Excel._Worksheet)excelApp.ActiveSheet;
                 worksheet.Name = "ChiTietHoaDon";
 
-                
-                string tieuDe = "BÁO CÁO THỐNG KÊ HÓA ĐƠN THEO NHÂN VIÊN";
+                // Tiêu đề
+                string tieuDe = "BÁO CÁO THỐNG KÊ HÓA ĐƠN THEO ĐƠN HÀNG";
                 worksheet.Cells[1, 1] = tieuDe;
-                
+
                 Excel.Range titleRange = worksheet.Range[
-                worksheet.Cells[1, 1], 
-                worksheet.Cells[1, dataGridView.Columns.Count]
+                    worksheet.Cells[1, 1],
+                    worksheet.Cells[1, dataGridView.Columns.Count]
                 ];
                 titleRange.Merge();
                 titleRange.Font.Size = 16;
                 titleRange.Font.Bold = true;
                 titleRange.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
 
-                for (int i = 1; i < dataGridView.Columns.Count + 1; i++)
+                // Tên cột
+                for (int i = 1; i <= dataGridView.Columns.Count; i++)
                 {
-                    worksheet.Cells[3, i] = dataGridView.Columns[1 - 1].HeaderText;
+                    worksheet.Cells[3, i] = dataGridView.Columns[i - 1].HeaderText;
                 }
-                
+
+                // Dữ liệu
                 for (int i = 0; i < dataGridView.Rows.Count; i++)
                 {
                     for (int j = 0; j < dataGridView.Columns.Count; j++)
                     {
                         if (dataGridView.Rows[i].Cells[j].Value != null)
                         {
-                            worksheet.Cells[i + 4, j + 1] = dataGridView.Rows[1].Cells[j].Value.ToString();
+                            worksheet.Cells[i + 4, j + 1] =
+                                dataGridView.Rows[i].Cells[j].Value.ToString();
                         }
                     }
                 }
-                
+
+                // Kẻ bảng
+                Excel.Range dataRange = worksheet.Range[
+                    worksheet.Cells[3, 1],
+                    worksheet.Cells[dataGridView.Rows.Count + 3, dataGridView.Columns.Count]
+                ];
+                dataRange.Borders.LineStyle = Excel.XlLineStyle.xlContinuous;
+                dataRange.Borders.Color = System.Drawing.Color.Black.ToArgb();
+
+                // Tự co giãn
+                dataRange.EntireColumn.AutoFit();
+
+                // Hiển thị Excel
                 excelApp.Visible = true;
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Xuất Excel thất bại: " + ex.Message);
             }
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
 
         }
     }

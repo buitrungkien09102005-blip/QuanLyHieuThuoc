@@ -23,7 +23,6 @@ namespace QuanLyHieuThuoc
         void HienThi()
         {
             dataGridView.Rows.Clear();
-            //SqlConnection conn = new SqlConnection(conStr);
             string query = @"SELECT MaThuoc, TenThuoc, DonViTinh, SoLuong, GiaBan, GhiChu
                              FROM   Thuoc";
             c.connect();
@@ -39,7 +38,6 @@ namespace QuanLyHieuThuoc
                 dataGridView.Rows[i].Cells[3].Value = read[3];
                 dataGridView.Rows[i].Cells[4].Value = read[4];
                 dataGridView.Rows[i].Cells[5].Value = read[5];
-                //dataGridView.Rows[i].Cells[6].Value = read[6];
                 i++;
             }
             c.disconnect();
